@@ -38,7 +38,7 @@ runs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r looker-janitor/requirements.txt
       shell: bash
     - name: Get Changed Files
       if: ${{ inputs.files == '' }}
