@@ -1,5 +1,5 @@
-name: 'Looker Janitor'
-description: Clean and organize Looker lookml view.lkml files.
+name: 'Looker Janitor: LookML View Cleaner'
+description: Tidy up Looker LookML view files by grouping, sorting and warning about inconsistencies.
 author: 'Alhan Keser'
 
 inputs:
