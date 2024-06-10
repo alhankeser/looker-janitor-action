@@ -20,7 +20,7 @@ These are all default behaviors that can be turned off or customized:
 
 |name|required|type|default|description|
 |--|--|--|--|--|
-|files|no|string|""|list of space-delimited relative file paths. Example: `views/orders.view.lkml views/customers.view.lkml`|
+|files|no|string|""|List of space-delimited relative file paths. Example: `views/orders.view.lkml views/customers.view.lkml`. If empty, will clean any changed files that end in `.view.lkml` or `.view.lookml`.|
 
 ## Outputs
 
