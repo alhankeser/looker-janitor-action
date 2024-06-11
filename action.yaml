@@ -91,21 +91,52 @@ runs:
     - name: Run Looker Janitor
       id: looker_janitor
       run: |
+        
+        type_order="${{ inputs.type_order }}"
+        files="${{ steps.files_to_clean.outputs.files }}"
+        param_order="${{ inputs.param_order }}"
+        primary_key_first="${{ inputs.primary_key_first }}"
+        order_by_label="${{ inputs.order_by_label }}"
+        order_fields="${{ inputs.order_fields }}"
+        order_field_parameters="${{ inputs.order_field_parameters }}"
+        check_required_params="${{ inputs.check_required_params }}"
+        required_filter="${{ inputs.required_filter }}"
+        required_parameter="${{ inputs.required_parameter }}"
+        required_dimension="${{ inputs.required_dimension }}"
+        required_dimension_group="${{ inputs.required_dimension_group }}"
+        required_measure="${{ inputs.required_measure }}"
+        required_set="${{ inputs.required_set }}"
+
+        type_order="${type_order//$'\n'/ }"
+        files="${files//$'\n'/ }"
+        param_order="${param_order//$'\n'/ }"
+        primary_key_first="${primary_key_first//$'\n'/ }"
+        order_by_label="${order_by_label//$'\n'/ }"
+        order_fields="${order_fields//$'\n'/ }"
+        order_field_parameters="${order_field_parameters//$'\n'/ }"
+        check_required_params="${check_required_params//$'\n'/ }"
+        required_filter="${required_filter//$'\n'/ }"
+        required_parameter="${required_parameter//$'\n'/ }"
+        required_dimension="${required_dimension//$'\n'/ }"
+        required_dimension_group="${required_dimension_group//$'\n'/ }"
+        required_measure="${required_measure//$'\n'/ }"
+        required_set="${required_set//$'\n'/ }"
+
         python looker-janitor/main.py \
         --files "${{ steps.files_to_clean.outputs.files }}" \
-        --type_order "${{ inputs.type_order//$'\n'/ }}" \
-        --param_order "${{ inputs.param_order//$'\n'/ }}" \
-        --primary_key_first "${{ inputs.primary_key_first//$'\n'/ }}" \
-        --order_by_label "${{ inputs.order_by_label//$'\n'/ }}" \
-        --order_fields "${{ inputs.order_fields//$'\n'/ }}" \
-        --order_field_parameters "${{ inputs.order_field_parameters//$'\n'/ }}" \
-        --check_required_params "${{ inputs.check_required_params//$'\n'/ }}" \
-        --required_filter "${{ inputs.required_filter//$'\n'/ }}" \
-        --required_parameter "${{ inputs.required_parameter//$'\n'/ }}" \
-        --required_dimension "${{ inputs.required_dimension//$'\n'/ }}" \
-        --required_dimension_group "${{ inputs.required_dimension_group//$'\n'/ }}" \
-        --required_measure "${{ inputs.required_measure//$'\n'/ }}" \
-        --required_set "${{ inputs.required_set//$'\n'/ }}"
+        --type_order "$type_order" \ 
+        --param_order "$param_order" \ 
+        --primary_key_first "$primary_key_first" \ 
+        --order_by_label "$order_by_label" \ 
+        --order_fields "$order_fields" \ 
+        --order_field_parameters "$order_field_parameters" \ 
+        --check_required_params "$check_required_params" \ 
+        --required_filter "$required_filter" \ 
+        --required_parameter "$required_parameter" \ 
+        --required_dimension "$required_dimension" \ 
+        --required_dimension_group "$required_dimension_group" \ 
+        --required_measure "$required_measure" \ 
+        --required_set "$required_set"
       shell: bash
     - name: Commit Cleaned Files
       id: commit_changes
