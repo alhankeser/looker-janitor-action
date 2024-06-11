@@ -67,33 +67,38 @@ inputs:
     required: false
     type: string
     description: 'List of required filter parameters.'
-    default: ''
+    default: |
+      suggest_dimension
   required_parameter:
     required: false
     type: string
     description: 'List of required parameter parameters.'
-    default: ''
+    default: |
+      type
   required_dimension:
     required: false
     type: string
     description: 'List of required dimension parameters.'
-    default: ''
+    default: |
+      label
   required_dimension_group:
     required: false
     type: string
     description: 'List of required dimension_group parameters.'
-    default: ''
+    default: |
+      type
   required_measure:
     required: false
     type: string
     description: 'List of required measure parameters.'
-    default: ''
+    default: |
+      drill_fields
   required_set:
     required: false
     type: string
     description: 'List of required filter parameters.'
-    default: ''
-
+    default: |
+      fields
 
 outputs:
   warnings:
