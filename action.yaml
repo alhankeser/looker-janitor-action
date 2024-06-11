@@ -123,20 +123,20 @@ runs:
         required_set="${required_set//$'\n'/ }"
 
         python looker-janitor/main.py \
-        --files "${{ steps.files_to_clean.outputs.files }}" \
-        --type_order "$type_order" \ 
-        --param_order "$param_order" \ 
-        --primary_key_first "$primary_key_first" \ 
-        --order_by_label "$order_by_label" \ 
-        --order_fields "$order_fields" \ 
-        --order_field_parameters "$order_field_parameters" \ 
-        --check_required_params "$check_required_params" \ 
-        --required_filter "$required_filter" \ 
-        --required_parameter "$required_parameter" \ 
-        --required_dimension "$required_dimension" \ 
-        --required_dimension_group "$required_dimension_group" \ 
-        --required_measure "$required_measure" \ 
-        --required_set "$required_set"
+        --files ${{ steps.files_to_clean.outputs.files }} \
+        --type_order ${type_order} \ 
+        --param_order ${param_order} \ 
+        --primary_key_first ${primary_key_first} \ 
+        --order_by_label ${order_by_label} \ 
+        --order_fields ${order_fields} \ 
+        --order_field_parameters ${order_field_parameters} \ 
+        --check_required_params ${check_required_params} \ 
+        --required_filter ${required_filter} \ 
+        --required_parameter ${required_parameter} \ 
+        --required_dimension ${required_dimension} \ 
+        --required_dimension_group ${required_dimension_group} \ 
+        --required_measure ${required_measure} \ 
+        --required_set ${required_set}
       shell: bash
     - name: Commit Cleaned Files
       id: commit_changes
