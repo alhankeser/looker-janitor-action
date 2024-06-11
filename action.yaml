@@ -78,8 +78,8 @@ runs:
         files: |
             **.view.lkml
             **.view.lookml
-    - name: Get Files to Clean
-      id: files_to_clean
+    - name: Get Looker Janitor Arguments
+      id: janitor_args
       run: |
         if [ "${{ inputs.files }}" != "" ]; then
           files="${{ inputs.files }}"
@@ -87,12 +87,7 @@ runs:
           files="${{ steps.changed_files.outputs.all_changed_files }}"
         fi
         echo "files=${files//$'\n'/ }" >> $GITHUB_OUTPUT
-      shell: bash
-    - name: Run Looker Janitor
-      id: looker_janitor
-      run: |
         
-       
         type_order="${{ inputs.type_order }}"
         param_order="${{ inputs.param_order }}"
         primary_key_first="${{ inputs.primary_key_first }}"
@@ -107,40 +102,43 @@ runs:
         required_measure="${{ inputs.required_measure }}"
         required_set="${{ inputs.required_set }}"
 
-        type_order="${type_order//$'\n'/ }"
-        param_order="${param_order//$'\n'/ }"
-        primary_key_first="${primary_key_first//$'\n'/ }"
-        order_by_label="${order_by_label//$'\n'/ }"
-        order_fields="${order_fields//$'\n'/ }"
-        order_field_parameters="${order_field_parameters//$'\n'/ }"
-        check_required_params="${check_required_params//$'\n'/ }"
-        required_filter="${required_filter//$'\n'/ }"
-        required_parameter="${required_parameter//$'\n'/ }"
-        required_dimension="${required_dimension//$'\n'/ }"
-        required_dimension_group="${required_dimension_group//$'\n'/ }"
-        required_measure="${required_measure//$'\n'/ }"
-        required_set="${required_set//$'\n'/ }"
-
+        echo "type_order=${type_order//$'\n'/ }" >> $GITHUB_OUTPUT
+        echo "param_order=${param_order//$'\n'/ }" >> $GITHUB_OUTPUT
+        echo "primary_key_first=${primary_key_first//$'\n'/ }" >> $GITHUB_OUTPUT
+        echo "order_by_label=${order_by_label//$'\n'/ }" >> $GITHUB_OUTPUT
+        echo "order_fields=${order_fields//$'\n'/ }" >> $GITHUB_OUTPUT
+        echo "order_field_parameters=${order_field_parameters//$'\n'/ }" >> $GITHUB_OUTPUT
+        echo "check_required_params=${check_required_params//$'\n'/ }" >> $GITHUB_OUTPUT
+        echo "required_filter=${required_filter//$'\n'/ }" >> $GITHUB_OUTPUT
+        echo "required_parameter=${required_parameter//$'\n'/ }" >> $GITHUB_OUTPUT
+        echo "required_dimension=${required_dimension//$'\n'/ }" >> $GITHUB_OUTPUT
+        echo "required_dimension_group=${required_dimension_group//$'\n'/ }" >> $GITHUB_OUTPUT
+        echo "required_measure=${required_measure//$'\n'/ }" >> $GITHUB_OUTPUT
+        echo "required_set=${required_set//$'\n'/ }" >> $GITHUB_OUTPUT
+      shell: bash
+    - name: Run Looker Janitor
+      id: looker_janitor
+      run: |
         python looker-janitor/main.py \
-        --files ${{ steps.files_to_clean.outputs.files }} \
-        --type_order echo "${type_order}" \ 
-        --param_order echo "${param_order}" \ 
-        --primary_key_first echo "${primary_key_first}" \ 
-        --order_by_label echo "${order_by_label}" \ 
-        --order_fields echo "${order_fields}" \ 
-        --order_field_parameters echo "${order_field_parameters}" \ 
-        --check_required_params echo "${check_required_params}" \ 
-        --required_filter echo "${required_filter}" \ 
-        --required_parameter echo "${required_parameter}" \ 
-        --required_dimension echo "${required_dimension}" \ 
-        --required_dimension_group echo "${required_dimension_group}" \ 
-        --required_measure echo "${required_measure}" \ 
-        --required_set echo "${required_set}
+        --files ${{ steps.janitor_args.outputs.files }} \
+        --type_order ${{ steps.janitor_args.outputs.type_order }} \ 
+        --param_order ${{ steps.janitor_args.outputs.param_order }} \ 
+        --primary_key_first ${{ steps.janitor_args.outputs.primary_key_first }} \ 
+        --order_by_label ${{ steps.janitor_args.outputs.order_by_label }} \ 
+        --order_fields ${{ steps.janitor_args.outputs.order_fields }} \ 
+        --order_field_parameters ${{ steps.janitor_args.outputs.order_field_parameters }} \ 
+        --check_required_params ${{ steps.janitor_args.outputs.check_required_params }} \ 
+        --required_filter ${{ steps.janitor_args.outputs.required_filter }} \ 
+        --required_parameter ${{ steps.janitor_args.outputs.required_parameter }} \ 
+        --required_dimension ${{ steps.janitor_args.outputs.required_dimension }} \ 
+        --required_dimension_group ${{ steps.janitor_args.outputs.required_dimension_group }} \ 
+        --required_measure ${{ steps.janitor_args.outputs.required_measure }} \ 
+        --required_set ${{ steps.janitor_args.outputs.required_set }}
       shell: bash
     - name: Commit Cleaned Files
       id: commit_changes
       run: |
-        for file in ${{ steps.files_to_clean.outputs.files }}; do
+        for file in ${{ steps.janitor_args.outputs.files }}; do
             git add "${file}"
         done
         git commit -m "Run Looker Janitor" || continue
