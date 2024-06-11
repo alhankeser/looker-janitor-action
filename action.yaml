@@ -38,6 +38,62 @@ inputs:
       value_format
       filters
       drill_fields
+  primary_key_first:
+    required: false
+    type: boolean
+    description: 'Should primary key be ordered first.'
+    default: true
+  order_by_label:
+    required: false
+    type: boolean
+    description: 'Should fields be ordered by their labels.'
+    default: true
+  order_fields:
+    required: false
+    type: boolean
+    description: 'Should fields be ordered.'
+    default: true
+  order_field_parameters:
+    required: false
+    type: boolean
+    description: 'Should field parameters be ordered.'
+    default: true
+  check_required_params:
+    required: false
+    type: boolean
+    description: 'Should required parameters be checked.'
+    default: false
+  required_filter:
+    required: false
+    type: string
+    description: 'List of required filter parameters.'
+    default: ''
+  required_parameter:
+    required: false
+    type: string
+    description: 'List of required parameter parameters.'
+    default: ''
+  required_dimension:
+    required: false
+    type: string
+    description: 'List of required dimension parameters.'
+    default: ''
+  required_dimension_group:
+    required: false
+    type: string
+    description: 'List of required dimension_group parameters.'
+    default: ''
+  required_measure:
+    required: false
+    type: string
+    description: 'List of required measure parameters.'
+    default: ''
+  required_set:
+    required: false
+    type: string
+    description: 'List of required filter parameters.'
+    default: ''
+
 
 outputs:
   warnings:
