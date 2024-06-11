@@ -4,10 +4,40 @@ author: 'Alhan Keser'
 
 inputs:
   files:
-    description: 'List of files to clean. If omitted, then any changed view files will be cleaned.'
-    type: string
-    default: ''
     required: false
+    type: string
+    description: 'List of files to clean. If omitted, then any changed view files will be cleaned.'
+    default: ''
+  type_order:
+    required: false
+    type: string
+    description: 'Order of field types.'
+    default: |
+      filter
+      parameter
+      dimension
+      dimension_group
+      measure
+      set
+  param_order:
+    required: false
+    type: string
+    description: 'Order of field parameters.'
+    default: |
+      hidden
+      type
+      view_label
+      group_label
+      group_item_label
+      label
+      description
+      sql
+      sql_start
+      sql_end
+      value_format_name
+      value_format
+      filters
+      drill_fields
 
 outputs:
   warnings:
@@ -61,7 +91,21 @@ runs:
     - name: Run Looker Janitor
       id: looker_janitor
       run: |
-        python looker-janitor/main.py ${{ steps.files_to_clean.outputs.files }}
+        python looker-janitor/main.py \
+        --files "${{ steps.files_to_clean.outputs.files }}" \
+        --type_order "${{ inputs.type_order//$'\n'/ }}" \
+        --param_order "${{ inputs.param_order//$'\n'/ }}" \
+        --primary_key_first "${{ inputs.primary_key_first//$'\n'/ }}" \
+        --order_by_label "${{ inputs.order_by_label//$'\n'/ }}" \
+        --order_fields "${{ inputs.order_fields//$'\n'/ }}" \
+        --order_field_parameters "${{ inputs.order_field_parameters//$'\n'/ }}" \
+        --check_required_params "${{ inputs.check_required_params//$'\n'/ }}" \
+        --required_filter "${{ inputs.required_filter//$'\n'/ }}" \
+        --required_parameter "${{ inputs.required_parameter//$'\n'/ }}" \
+        --required_dimension "${{ inputs.required_dimension//$'\n'/ }}" \
+        --required_dimension_group "${{ inputs.required_dimension_group//$'\n'/ }}" \
+        --required_measure "${{ inputs.required_measure//$'\n'/ }}" \
+        --required_set "${{ inputs.required_set//$'\n'/ }}"
       shell: bash
     - name: Commit Cleaned Files
       id: commit_changes
