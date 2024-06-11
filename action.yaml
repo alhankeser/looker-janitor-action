@@ -124,7 +124,7 @@ runs:
 
         python looker-janitor/main.py \
         --files ${{ steps.files_to_clean.outputs.files }} \
-        --type_order ${type_order} \ 
+        --type_order ${{ type_order }} \ 
         --param_order ${param_order} \ 
         --primary_key_first ${primary_key_first} \ 
         --order_by_label ${order_by_label} \ 
