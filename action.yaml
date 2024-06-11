@@ -121,18 +121,18 @@ runs:
       run: |
         python looker-janitor/main.py \
         --files ${{ steps.janitor_args.outputs.files }} \
-        --type_order ${{ steps.janitor_args.outputs.type_order }} \ 
-        --param_order ${{ steps.janitor_args.outputs.param_order }} \ 
-        --primary_key_first ${{ steps.janitor_args.outputs.primary_key_first }} \ 
-        --order_by_label ${{ steps.janitor_args.outputs.order_by_label }} \ 
-        --order_fields ${{ steps.janitor_args.outputs.order_fields }} \ 
-        --order_field_parameters ${{ steps.janitor_args.outputs.order_field_parameters }} \ 
-        --check_required_params ${{ steps.janitor_args.outputs.check_required_params }} \ 
-        --required_filter ${{ steps.janitor_args.outputs.required_filter }} \ 
-        --required_parameter ${{ steps.janitor_args.outputs.required_parameter }} \ 
-        --required_dimension ${{ steps.janitor_args.outputs.required_dimension }} \ 
-        --required_dimension_group ${{ steps.janitor_args.outputs.required_dimension_group }} \ 
-        --required_measure ${{ steps.janitor_args.outputs.required_measure }} \ 
+        --type_order ${{ steps.janitor_args.outputs.type_order }} \
+        --param_order ${{ steps.janitor_args.outputs.param_order }} \
+        --primary_key_first ${{ steps.janitor_args.outputs.primary_key_first }} \
+        --order_by_label ${{ steps.janitor_args.outputs.order_by_label }} \
+        --order_fields ${{ steps.janitor_args.outputs.order_fields }} \
+        --order_field_parameters ${{ steps.janitor_args.outputs.order_field_parameters }} \
+        --check_required_params ${{ steps.janitor_args.outputs.check_required_params }} \
+        --required_filter ${{ steps.janitor_args.outputs.required_filter }} \
+        --required_parameter ${{ steps.janitor_args.outputs.required_parameter }} \
+        --required_dimension ${{ steps.janitor_args.outputs.required_dimension }} \
+        --required_dimension_group ${{ steps.janitor_args.outputs.required_dimension_group }} \
+        --required_measure ${{ steps.janitor_args.outputs.required_measure }} \
         --required_set ${{ steps.janitor_args.outputs.required_set }}
       shell: bash
     - name: Commit Cleaned Files
