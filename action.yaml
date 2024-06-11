@@ -52,10 +52,11 @@ runs:
       id: files_to_clean
       run: |
         if [ "${{ inputs.files }}" != "" ]; then
-          echo "::set-output name=files::${{ inputs.files }}"
+          files="${{ inputs.files }}"
         else
-          echo "::set-output name=files::${{ steps.changed_files.outputs.all_changed_files }}"
+          files="${{ steps.changed_files.outputs.all_changed_files }}"
         fi
+        echo "files=${files//$'\n'/ }" >> $GITHUB_OUTPUT
       shell: bash
     - name: Run Looker Janitor
       id: looker_janitor
