@@ -207,5 +207,5 @@ runs:
       shell: bash
 
 branding:
-  icon: check-square
-  color: green
+  icon: check-circle
+  color: purple
