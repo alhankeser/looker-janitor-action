@@ -43,16 +43,11 @@ inputs:
     type: boolean
     description: 'Should primary key be ordered first.'
     default: true
-  order_by_label:
+  order_types:
     required: false
     type: boolean
-    description: 'Should fields be ordered by their labels.'
+    description: 'Should fields be ordered by their type.'
     default: true
-  localization_file_path:
-    required: false
-    type: string
-    description: 'Localization file path to use for label sorting'
-    default: 'None'
   order_fields:
     required: false
     type: boolean
@@ -63,6 +58,16 @@ inputs:
     type: boolean
     description: 'Should field parameters be ordered.'
     default: true
+  order_fields_by_label:
+    required: false
+    type: boolean
+    description: 'Should fields be ordered by their labels.'
+    default: true
+  localization_file_path:
+    required: false
+    type: string
+    description: 'Localization file path to use for label sorting'
+    default: 'None'
   check_required_params:
     required: false
     type: boolean
@@ -157,10 +162,11 @@ runs:
         type_order="${{ inputs.type_order }}"
         param_order="${{ inputs.param_order }}"
         primary_key_first="${{ inputs.primary_key_first }}"
-        order_by_label="${{ inputs.order_by_label }}"
-        localization_file_path="${{ inputs.localization_file_path }}"
+        order_types="${{ inputs.order_types }}"
         order_fields="${{ inputs.order_fields }}"
         order_field_parameters="${{ inputs.order_field_parameters }}"
+        order_fields_by_label="${{ inputs.order_fields_by_label }}"
+        localization_file_path="${{ inputs.localization_file_path }}"
         check_required_params="${{ inputs.check_required_params }}"
         required_filter="${{ inputs.required_filter }}"
         required_parameter="${{ inputs.required_parameter }}"
@@ -172,10 +178,11 @@ runs:
         echo "type_order=${type_order//$'\n'/ }" >> $GITHUB_OUTPUT
         echo "param_order=${param_order//$'\n'/ }" >> $GITHUB_OUTPUT
         echo "primary_key_first=${primary_key_first}" >> $GITHUB_OUTPUT
-        echo "order_by_label=${order_by_label}" >> $GITHUB_OUTPUT
-        echo "localization_file_path=${localization_file_path}" >> $GITHUB_OUTPUT
+        echo "order_types=${order_types}" >> $GITHUB_OUTPUT
         echo "order_fields=${order_fields}" >> $GITHUB_OUTPUT
         echo "order_field_parameters=${order_field_parameters}" >> $GITHUB_OUTPUT
+        echo "order_fields_by_label=${order_fields_by_label}" >> $GITHUB_OUTPUT
+        echo "localization_file_path=${localization_file_path}" >> $GITHUB_OUTPUT
         echo "check_required_params=${check_required_params}" >> $GITHUB_OUTPUT
         echo "required_filter=${required_filter//$'\n'/ }" >> $GITHUB_OUTPUT
         echo "required_parameter=${required_parameter//$'\n'/ }" >> $GITHUB_OUTPUT
@@ -192,10 +199,11 @@ runs:
         --type_order ${{ steps.janitor_args.outputs.type_order }} \
         --param_order ${{ steps.janitor_args.outputs.param_order }} \
         --primary_key_first ${{ steps.janitor_args.outputs.primary_key_first }} \
-        --order_by_label ${{ steps.janitor_args.outputs.order_by_label }} \
-        --localization_file_path ${{ steps.janitor_args.outputs.localization_file_path }} \
+        --order_types ${{ steps.janitor_args.outputs.order_types }} \
         --order_fields ${{ steps.janitor_args.outputs.order_fields }} \
         --order_field_parameters ${{ steps.janitor_args.outputs.order_field_parameters }} \
+        --order_fields_by_label ${{ steps.janitor_args.outputs.order_fields_by_label }} \
+        --localization_file_path ${{ steps.janitor_args.outputs.localization_file_path }} \
         --check_required_params ${{ steps.janitor_args.outputs.check_required_params }} \
         --required_filter ${{ steps.janitor_args.outputs.required_filter }} \
         --required_parameter ${{ steps.janitor_args.outputs.required_parameter }} \
