@@ -225,8 +225,8 @@ runs:
     - name: Set Output
       id: set_output
       run: |
-        warnings=$(cat warnings.txt | base64)
-        echo "warnings=$warnings" >> "$GITHUB_OUTPUT"
+        warnings=$(cat warnings.txt)
+        echo "warnings=$warnings" >> $GITHUB_OUTPUT
       shell: bash
 
 branding:
