@@ -110,10 +110,6 @@ inputs:
     default: |
       fields
 
-outputs:
-  warnings:
-    description: 'List of warnings.'
-
 runs:
   using: 'composite'
   steps:
