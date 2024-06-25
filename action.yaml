@@ -210,7 +210,8 @@ runs:
         --required_dimension ${{ steps.janitor_args.outputs.required_dimension }} \
         --required_dimension_group ${{ steps.janitor_args.outputs.required_dimension_group }} \
         --required_measure ${{ steps.janitor_args.outputs.required_measure }} \
-        --required_set ${{ steps.janitor_args.outputs.required_set }}
+        --required_set ${{ steps.janitor_args.outputs.required_set }} \
+        > warnings.txt
       shell: bash
     - name: Commit Cleaned Files
       id: commit_changes
@@ -221,6 +222,11 @@ runs:
         git commit -m "Run Looker Janitor" || continue
         git push
       shell: bash
+    - name: Set Output
+      id: set_output
+      run: |
+        warnings=$(cat warnings.txt)
+        echo "warnings=$warnings" >> "$GITHUB_OUTPUT"
 
 branding:
   icon: check-circle
