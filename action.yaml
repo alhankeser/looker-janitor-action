@@ -222,7 +222,7 @@ runs:
         uses: actions/upload-artifact@v2
         with:
           name: warnings
-          path: warnings.txt
+          path: looker-janitor/warnings.txt
 
 branding:
   icon: check-circle
