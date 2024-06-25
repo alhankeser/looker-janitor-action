@@ -227,6 +227,7 @@ runs:
       run: |
         warnings=$(cat warnings.txt)
         echo "warnings=$warnings" >> "$GITHUB_OUTPUT"
+      shell: bash
 
 branding:
   icon: check-circle
