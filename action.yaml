@@ -222,12 +222,11 @@ runs:
         git commit -m "Run Looker Janitor" || continue
         git push
       shell: bash
-    - name: Set Output
-      id: set_output
-      run: |
-        warnings=$(cat warnings.txt)
-        echo "warnings=$warnings" >> $GITHUB_OUTPUT
-      shell: bash
+    - name: Upload warnings as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: warnings
+          path: warnings.txt
 
 branding:
   icon: check-circle
