@@ -1,0 +1,15 @@
+name: Tag Dev
+on:
+  pull_request:
+    types:  [opened, synchronize]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Retag
+        run: |
+          git tag -f dev || true
+          git push -f --tags || true
