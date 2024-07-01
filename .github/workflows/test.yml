@@ -16,9 +16,9 @@ jobs:
           path: looker-janitor
           ref: dev
       - name: setup_test_order_field_types
+        shell: bash
         run: |
           cp looker-janitor/tests/test_files/test_order_field_types/input.view.lkml looker-janitor/tests/test_files/test_order_field_types/output.view.lkml
-        shell: bash
       - name: test_order_field_types
         id: test_order_field_types
         uses: alhankeser/looker-janitor-action@dev
@@ -27,6 +27,7 @@ jobs:
             looker-janitor/tests/test_files/test_order_field_types/output.view.lkml
       - name: check_test_order_field_types
         id: check_test_order_field_types
+        shell: bash
         run: |
           if diff -s "looker-janitor/tests/test_files/test_order_field_types/output.view.lkml" "looker-janitor/tests/test_files/test_order_field_types/expected.view.lkml"; then
             files_match=true
@@ -34,10 +35,9 @@ jobs:
             files_match=false
           fi
           echo "result=$files_match" >> $GITHUB_OUTPUT
-        shell: bash
       - name: print results
-        run: |
-          echo $files_match
         shell: bash
+        run: |
+          echo ${{ steps.check_test_order_field_types.outputs.files_match }}
       
 
