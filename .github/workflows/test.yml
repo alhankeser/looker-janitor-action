@@ -1,0 +1,35 @@
+name: Test
+on:
+  pull_request:
+    types:  [opened, synchronize]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout Looker Janitor
+        uses: actions/checkout@v2
+        with:
+          repository: alhankeser/looker-janitor
+          path: looker-janitor
+          ref: dev
+      - name: setup_test_order_field_types
+        run: |
+          cp looker-janitor/tests/test_files/test_order_field_types/input.view.lkml looker-janitor/tests/test_files/test_order_field_types/output.view.lkml
+        shell: bash
+      - name: test_order_field_types
+        id: test_order_field_types
+        uses: alhankeser/looker-janitor-action@dev
+        with:
+          files: |
+            looker-janitor/tests/test_files/test_order_field_types/output.view.lkml
+      - name: check_test_order_field_types
+        id: check_test_order_field_types
+        run: |
+          files_match = diff -s "looker-janitor/tests/test_files/test_order_field_types/output.view" "looker-janitor/tests/test_files/test_order_field_types/expected.view"
+          echo "result=$files_match" >> GITHUB_OUTPUT
+        shell: bash
+      
+
