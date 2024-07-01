@@ -28,7 +28,11 @@ jobs:
       - name: check_test_order_field_types
         id: check_test_order_field_types
         run: |
-          files_match = diff -s "looker-janitor/tests/test_files/test_order_field_types/output.view" "looker-janitor/tests/test_files/test_order_field_types/expected.view"
+          if diff -s "looker-janitor/tests/test_files/test_order_field_types/output.view" "looker-janitor/tests/test_files/test_order_field_types/expected.view"; then
+            files_match=true
+          else
+            files_match=false
+          fi
           echo "result=$files_match" >> $GITHUB_OUTPUT
         shell: bash
       
