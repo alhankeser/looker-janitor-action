@@ -38,6 +38,6 @@ jobs:
       - name: print results
         shell: bash
         run: |
-          echo ${{ steps.check_test_order_field_types.outputs.files_match }}
+          echo ${{ steps.check_test_order_field_types.outputs.result }}
       
 
