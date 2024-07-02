@@ -9,7 +9,7 @@ The GitHub Action to clean your Looker LookML view files.
 Add this as a step to a workflow file:
 ```--yaml
 - name: Run Looker Janitor
-  uses: alhankeser/looker-janitor-action@v0.3.7
+  uses: alhankeser/looker-janitor-action@v0
 ```
 
 ## What it does
