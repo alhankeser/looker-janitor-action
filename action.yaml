@@ -208,15 +208,6 @@ runs:
         --required_measure ${{ steps.janitor_args.outputs.required_measure }} \
         --required_set ${{ steps.janitor_args.outputs.required_set }}
       shell: bash
-    - name: Commit Cleaned Files
-      id: commit_changes
-      run: |
-        for file in ${{ steps.janitor_args.outputs.files }}; do
-            git add "${file}"
-        done
-        git commit -m "Run Looker Janitor" || continue
-        git push
-      shell: bash
 
 branding:
   icon: check-circle
