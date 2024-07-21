@@ -1,4 +1,6 @@
-[![Tests](https://github.com/alhankeser/looker-janitor/actions/workflows/test.yml/badge.svg)](https://github.com/alhankeser/looker-janitor/actions/workflows/test.yml)
+[![Action Tests](https://github.com/alhankeser/looker-janitor/actions/workflows/action_tests.yml/badge.svg)](https://github.com/alhankeser/looker-janitor/actions/workflows/action_tests.yml)
+
+[![Python Tests](https://github.com/alhankeser/looker-janitor/actions/workflows/tests.yml/badge.svg)](https://github.com/alhankeser/looker-janitor/actions/workflows/tests.yml)
 
 # Looker Janitor
 
@@ -33,5 +35,5 @@ order_field_parameters | false | boolean | Should field parameters be ordered. |
 order_fields_by_label | false | boolean | Should fields be ordered by their labels. | true
 localization_file_path | false | string | Localization file path to use for label sorting | None
 
-
 ## Example usage
+
