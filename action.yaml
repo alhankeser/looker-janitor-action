@@ -187,8 +187,18 @@ runs:
         echo "required_measure=${required_measure//$'\n'/ }" >> $GITHUB_OUTPUT
         echo "required_set=${required_set//$'\n'/ }" >> $GITHUB_OUTPUT
       shell: bash
+    - name: Check Files
+      id: has_files_check
+      shell: bash
+      run: |
+        if [ "${{ steps.janitor_args.outputs.files }}" == "" ]; then
+          echo "has_files=false" >> $GITHUB_OUTPUT
+        else
+          echo "has_files=true" >> $GITHUB_OUTPUT
+        fi
     - name: Run Looker Janitor
       id: looker_janitor
+      if: ${{ steps.has_files_check.outputs.has_files == 'true' }}
       run: |
         python looker-janitor/main.py \
         --files ${{ steps.janitor_args.outputs.files }} \
