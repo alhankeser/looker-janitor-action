@@ -221,9 +221,10 @@ runs:
         --required_measure ${{ steps.janitor_args.outputs.required_measure }} \
         --required_set ${{ steps.janitor_args.outputs.required_set }})
 
-        encoded_output=$(echo "$output" | base64)
-
-        echo "results=$encoded_output" >> $GITHUB_OUTPUT
+        output="${output//'%'/'%25'}"
+        output="${output//$'\n'/'%0A'}"
+        output="${output//$'\r'/'%0D'}"
+        echo "results=$output" >> $GITHUB_OUTPUT
       shell: bash
 
 branding:
