@@ -109,7 +109,10 @@ inputs:
     description: 'List of required filter parameters.'
     default: |
       fields
-
+outputs:
+  results:
+    description: Required parameters check results
+    value: ${{ steps.looker_janitor.outputs.results }}
 runs:
   using: 'composite'
   steps:
@@ -218,9 +221,7 @@ runs:
         --required_measure ${{ steps.janitor_args.outputs.required_measure }} \
         --required_set ${{ steps.janitor_args.outputs.required_set }})
 
-        output_with_br=$(echo "$output" | sed ':a;N;$!ba;s/\n/<br>/g')
-        encoded_output=$(echo "$output" | base64)
-        echo "results=$output_with_br" >> $GITHUB_OUTPUT
+        echo "results=hello" >> $GITHUB_OUTPUT
       shell: bash
 
 branding:
