@@ -200,7 +200,7 @@ runs:
       id: looker_janitor
       if: ${{ steps.has_files_check.outputs.has_files == 'true' }}
       run: |
-        python looker-janitor/main.py \
+        output=$(python looker-janitor/main.py \
         --files ${{ steps.janitor_args.outputs.files }} \
         --type_order ${{ steps.janitor_args.outputs.type_order }} \
         --param_order ${{ steps.janitor_args.outputs.param_order }} \
@@ -216,9 +216,11 @@ runs:
         --required_dimension ${{ steps.janitor_args.outputs.required_dimension }} \
         --required_dimension_group ${{ steps.janitor_args.outputs.required_dimension_group }} \
         --required_measure ${{ steps.janitor_args.outputs.required_measure }} \
-        --required_set ${{ steps.janitor_args.outputs.required_set }}
-        pwd
-        echo "results=$(cat alhankeser/looker-janitor/looker-janitor-output.txt)" >> $GITHUB_OUTPUT
+        --required_set ${{ steps.janitor_args.outputs.required_set }})
+
+        echo "$output"
+
+        echo "results=$output" >> $GITHUB_OUTPUT
       shell: bash
 
 branding:
