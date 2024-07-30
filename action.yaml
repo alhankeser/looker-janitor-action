@@ -221,7 +221,7 @@ runs:
         --required_measure ${{ steps.janitor_args.outputs.required_measure }} \
         --required_set ${{ steps.janitor_args.outputs.required_set }})
 
-        echo "results=hello" >> $GITHUB_OUTPUT
+        echo "results=$output" >> $GITHUB_OUTPUT
       shell: bash
 
 branding:
