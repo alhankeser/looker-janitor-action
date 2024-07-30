@@ -217,7 +217,8 @@ runs:
         --required_dimension_group ${{ steps.janitor_args.outputs.required_dimension_group }} \
         --required_measure ${{ steps.janitor_args.outputs.required_measure }} \
         --required_set ${{ steps.janitor_args.outputs.required_set }}
-        echo "results=$(cat looker-janitor-output.txt)" >> $GITHUB_OUTPUT
+        pwd
+        echo "results=$(cat alhankeser/looker-janitor/looker-janitor-output.txt)" >> $GITHUB_OUTPUT
       shell: bash
 
 branding:
