@@ -221,7 +221,7 @@ runs:
         --required_measure ${{ steps.janitor_args.outputs.required_measure }} \
         --required_set ${{ steps.janitor_args.outputs.required_set }})
 
-        encoded_output = $(echo "$output" | base64)
+        encoded_output=$(echo "$output" | base64)
 
         echo "results=$encoded_output" >> $GITHUB_OUTPUT
       shell: bash
