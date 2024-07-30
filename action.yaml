@@ -130,7 +130,7 @@ runs:
       with:
         repository: alhankeser/looker-janitor
         path: looker-janitor
-        ref: dev
+        ref: v0
     - name: Install Python
       uses: actions/setup-python@v2
       with:
