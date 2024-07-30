@@ -203,7 +203,7 @@ runs:
       id: looker_janitor
       if: ${{ steps.has_files_check.outputs.has_files == 'true' }}
       run: |
-        output=$(python looker-janitor/main.py \
+        python looker-janitor/main.py \
         --files ${{ steps.janitor_args.outputs.files }} \
         --type_order ${{ steps.janitor_args.outputs.type_order }} \
         --param_order ${{ steps.janitor_args.outputs.param_order }} \
@@ -219,12 +219,7 @@ runs:
         --required_dimension ${{ steps.janitor_args.outputs.required_dimension }} \
         --required_dimension_group ${{ steps.janitor_args.outputs.required_dimension_group }} \
         --required_measure ${{ steps.janitor_args.outputs.required_measure }} \
-        --required_set ${{ steps.janitor_args.outputs.required_set }})
-
-        output="${output//'%'/'%25'}"
-        output="${output//$'\n'/'%0A'}"
-        output="${output//$'\r'/'%0D'}"
-        echo "results=$output" >> $GITHUB_OUTPUT
+        --required_set ${{ steps.janitor_args.outputs.required_set }} >> results.txt
       shell: bash
 
 branding:
