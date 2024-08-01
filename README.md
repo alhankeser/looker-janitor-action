@@ -177,6 +177,7 @@ samples/example_input.view.lkml:65: measure 'total_sales' missing value_format_n
 ```
 
 When combined with [reviewdog](https://github.com/reviewdog/reviewdog), you can get something that looks like this:
+![image](https://github.com/user-attachments/assets/35d2dc9f-2bcf-414d-a17c-01bbd1712c71)
 
 ## Inputs
 
