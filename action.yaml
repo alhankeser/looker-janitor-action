@@ -109,10 +109,7 @@ inputs:
     description: 'List of required filter parameters.'
     default: |
       fields
-outputs:
-  results:
-    description: Required parameters check results
-    value: ${{ steps.looker_janitor.outputs.results }}
+
 runs:
   using: 'composite'
   steps:
