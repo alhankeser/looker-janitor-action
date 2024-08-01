@@ -219,7 +219,7 @@ runs:
         --required_dimension ${{ steps.janitor_args.outputs.required_dimension }} \
         --required_dimension_group ${{ steps.janitor_args.outputs.required_dimension_group }} \
         --required_measure ${{ steps.janitor_args.outputs.required_measure }} \
-        --required_set ${{ steps.janitor_args.outputs.required_set }} >> results.txt
+        --required_set ${{ steps.janitor_args.outputs.required_set }} >> looker-janitor/output.txt
       shell: bash
 
 branding:
